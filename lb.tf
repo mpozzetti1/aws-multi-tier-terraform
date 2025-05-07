@@ -1,24 +1,24 @@
 # Network Load Balancer (NLB) - TCP
 resource "aws_lb" "web-lb" {
-  name               = "web-lb"
-  internal           = false
-  load_balancer_type = "network"  # NLB
-  subnets            = [aws_subnet.webPublic1.id, aws_subnet.webPublic2.id]
-  security_groups    = [aws_security_group.sg-lb.id]
+  name                       = "web-lb"
+  internal                   = false
+  load_balancer_type         = "network" # NLB
+  subnets                    = [aws_subnet.webPublic1.id, aws_subnet.webPublic2.id]
+  security_groups            = [aws_security_group.sg-lb.id]
   enable_deletion_protection = false
 }
 
 resource "aws_lb_target_group" "web-tg" {
   name     = "web-tg"
   port     = 80
-  protocol = "TCP"  # Must be TCP/UDP for NLB
+  protocol = "TCP" # Must be TCP/UDP for NLB
   vpc_id   = aws_vpc.main.id
 }
 
 resource "aws_lb_listener" "web-lis" {
   load_balancer_arn = aws_lb.web-lb.arn
   port              = 80
-  protocol          = "TCP"  # Must be TCP/UDP for NLB
+  protocol          = "TCP" # Must be TCP/UDP for NLB
 
   default_action {
     type             = "forward"
@@ -28,11 +28,11 @@ resource "aws_lb_listener" "web-lis" {
 
 # Application Load Balancer (ALB) - HTTP/HTTPS
 resource "aws_lb" "app-lb" {
-  name               = "app-lb"
-  internal           = false
-  load_balancer_type = "application"  # ALB
-  subnets            = [aws_subnet.appPrivate1.id, aws_subnet.appPrivate2.id]
-  security_groups    = [aws_security_group.sg-lb.id]
+  name                       = "app-lb"
+  internal                   = false
+  load_balancer_type         = "application" # ALB
+  subnets                    = [aws_subnet.appPrivate1.id, aws_subnet.appPrivate2.id]
+  security_groups            = [aws_security_group.sg-lb.id]
   enable_deletion_protection = false
 }
 

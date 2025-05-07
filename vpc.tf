@@ -6,13 +6,13 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "webPublic1" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "eu-west-1a"  # Explicit AZ assignment
+  availability_zone = "eu-west-1a" # Explicit AZ assignment
 }
 
 resource "aws_subnet" "webPublic2" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "eu-west-1b"  # Different AZ
+  availability_zone = "eu-west-1b" # Different AZ
 }
 
 # Application subnets
